@@ -1,0 +1,31 @@
+version: "3"
+services:
+  chapters_service:
+    build: ./chapters_service
+    container_name: chapters_service_container
+    ports:
+      - "5002:5002"
+    networks:
+      - sa2-app
+    links:
+      - chapters_db
+    restart: on-failure
+    depends_on:
+      - chapters_db
+    volumes:
+      - ./chapters_service:/app
+      - /app/node_modules
+  chapters_db:
+    image: mongo:3.6.19-xenial
+    ports:
+      - "27018:27017"
+    networks:
+      - sa2-app
+    volumes:
+      - chapters-volume:/data/db
+networks:
+  sa2-app:
+    driver: bridge
+volumes:
+  chapters-volume:
+    driver: local
