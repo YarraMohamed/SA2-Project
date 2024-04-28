@@ -1,13 +1,6 @@
 version: "3"
 services:
-  books_db:
-    image: mongo:3.6.19-xenial
-    ports:
-      - "27017:27017"
-    networks:
-      - library-app
-    volumes:
-      - books-volume:/data/db
+
   nodejs_service:
     build: ./nodejs_service
     container_name: nodejs_service_containerS
@@ -16,18 +9,27 @@ services:
     networks:
       - library-app
     links:
-      - books_db
-    restart : on-failure
+      - chapters_db
+    restart: on-failure
     depends_on:
-      - books_db
+      - chapters_db
     volumes:
       - ./nodejs_service:/app
       - /app/node_modules
+  books_db:
+    image: mongo:3.6.19-xenial
+    ports:
+      - "27018:27017"
+    networks:
+      - library-app
+    volumes:
+      - books-volume:/data/db
+
   chapters_service:
     build: ./chapters_service
     container_name: chapters_service_container
     ports:
-      - "5002:5002"
+      - "5003:5003"
     networks:
       - library-app
     links:
@@ -41,16 +43,45 @@ services:
   chapters_db:
     image: mongo:3.6.19-xenial
     ports:
-      - "27018:27017"
+      - "27019:27017"
     networks:
       - library-app
     volumes:
       - chapters-volume:/data/db
+  
+  discount_service_node.js:
+    build: ./discount_service_node.js
+    container_name: discount_service_node.js_container
+    ports:
+      - "6003:6003"
+    networks:
+      - library-app
+    links:
+      - discount_db
+    restart: on-failure
+    depends_on:
+      - discount_db
+    volumes:
+      - ./discount_service_node.js:/app
+      - /app/node_modules
+  discount_db:
+    image: mongo:3.6.19-xenial
+    ports:
+      - "27015:27017"
+    networks:
+      - library-app
+    volumes:
+      - discount-volume:/data/db
+
 networks:
   library-app:
     driver: bridge
 volumes:
-  chapters-volume:
-    driver: local
   books-volume:
     driver: local
+  chapters-volume:
+    driver: local
+  discount-volume :
+    driver : local
+  
+  

@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const chapterController = require('../controllers/chapters.controller');
+const chapterController = require('../controller/chapters.controller');
 
 router.post('/:book_id/chapters', chapterController.createChapter);
 router.get('/:bookId/chapters', chapterController.getChaptersByBookId);
