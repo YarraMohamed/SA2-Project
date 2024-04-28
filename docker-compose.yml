@@ -3,7 +3,7 @@ services:
 
   nodejs_service:
     build: ./nodejs_service
-    container_name: nodejs_service_containerS
+    container_name: nodejs_service_container
     ports:
       - "6002:6002"
     networks:
@@ -97,6 +97,30 @@ services:
     volumes:
       - requests-volume:/data/db
 
+  auth_service:
+    build: ./auth_service
+    container_name: auth_service_container
+    ports:
+      - "6004:6004"
+    networks:
+      - library-app
+    links:
+      - auth_db
+    restart: on-failure
+    depends_on:
+      - auth_db
+    volumes:
+      - ./auth_service:/app
+      - /app/node_modules
+  auth_db:
+    image: mongo:3.6.19-xenial
+    ports:
+      - "27014:27017"
+    networks:
+      - library-app
+    volumes:
+      - auth-volume:/data/db
+
 networks:
   library-app:
     driver: bridge
@@ -109,5 +133,7 @@ volumes:
     driver : local
   requests-volume:
     driver : local
+  auth-volume:
+    driver: local
   
   
