@@ -73,6 +73,30 @@ services:
     volumes:
       - discount-volume:/data/db
 
+  requests_docker:
+    build: ./requests_docker
+    container_name: requests_docker_container
+    ports:
+      - "4000:4000"
+    networks:
+      - library-app
+    links:
+      - requests_db
+    restart: on-failure
+    depends_on:
+      - requests_db
+    volumes:
+      - ./requests_docker:/app
+      - /app/node_modules
+  requests_db:
+    image: mongo:3.6.19-xenial
+    ports:
+      - "27016:27017"
+    networks:
+      - library-app
+    volumes:
+      - requests-volume:/data/db
+
 networks:
   library-app:
     driver: bridge
@@ -82,6 +106,8 @@ volumes:
   chapters-volume:
     driver: local
   discount-volume :
+    driver : local
+  requests-volume:
     driver : local
   
   
