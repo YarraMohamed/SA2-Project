@@ -1,0 +1,32 @@
+version: "3"
+services:
+  request_service:
+    build: ./requests_docker
+    container_name: request_service_container
+    ports:
+      - "4000:4000"
+    networks:
+      - library-app
+    links:
+      - mydatabase
+    restart: on-failure
+    depends_on:
+      - mydatabase
+    volumes:
+      - ./request_service:/app
+      - /app/node_modules
+  mydatabase:
+    image: mongo:3.6.19-xenial
+    ports:
+      - "27017:27017"
+    networks:
+      - library-app
+    volumes:
+      - mydatabase-volume:/data/db
+  
+networks:
+  library-app:
+    driver: bridge
+volumes:
+  mydatabase-volume:
+    driver: local
