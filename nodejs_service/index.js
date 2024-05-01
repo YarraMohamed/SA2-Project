@@ -101,7 +101,7 @@ app.put("/books/:id", upload.fields([{ name: 'pdfFile', maxCount: 1 }, { name: '
     if (author) updatedFields.author = author;
     if (field) updatedFields.field = field;
     if (publicationDate) updatedFields.publicationDate = publicationDate;
-    if (req.files["image"]) updatedFields.image = req.files['image'][0].originalname;
+    if (req.files["image"]) updatedFields.imageUrl = req.files['image'][0].originalname;
     if (req.files["pdfFile"]) updatedFields.pdfFile = req.files['pdfFile'][0].originalname;
 
 

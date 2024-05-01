@@ -1,5 +1,17 @@
 version: "3"
 services:
+  frontend:
+    build: ./frontend
+    container_name: frontend-container
+    stdin_open: true
+    ports:
+      - "3000:3000"
+    networks:
+      - library-app
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules
+    # restart: on-failure
 
   nodejs_service:
     build: ./nodejs_service
@@ -9,13 +21,14 @@ services:
     networks:
       - library-app
     links:
-      - chapters_db
+      - books_db
     restart: on-failure
     depends_on:
-      - chapters_db
+      - books_db
     volumes:
       - ./nodejs_service:/app
       - /app/node_modules
+      - ./nodejs_service/public:/app/public
   books_db:
     image: mongo:3.6.19-xenial
     ports:
