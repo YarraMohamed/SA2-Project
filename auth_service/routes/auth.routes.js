@@ -8,9 +8,5 @@ router.post("/register",authController.register
 router.post("/login", authController.login
 );
 
-// router.put("/logout", 
-//     authorized,
-//     authController.logout
-// );
 
 module.exports = router;
