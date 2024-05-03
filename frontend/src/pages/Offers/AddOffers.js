@@ -1,43 +1,52 @@
-import React, { useState } from "react";
+import React , {useState,useEffect} from "react";
+import { Link } from 'react-router-dom';
+import Alert from "react-bootstrap/Alert";
+import Table from 'react-bootstrap/Table';
+import axios from "axios";
+import Spinner from "react-bootstrap/Spinner";
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
-import Alert from "react-bootstrap/Alert";
-import axios from "axios";
 
 const AddOffers = () => {
-  const [offer, setOffer] = useState({
-    err: "",
-    success: "",
-    loading: false,
-    discount: "",
-    beginDiscount: "",
-    endDiscount: "",
-  });
 
-  const addDiscount = (e) => {
+  const [discounts,setDiscounts] = useState ({
+    err: "",
+    success : "",
+    loading: false,
+    success: null,
+    discount :"",
+    BeginDiscount : "",
+    endDiscount : "",
+  })
+
+  const createDiscount = (e) => {
     e.preventDefault();
-    setOffer({ ...offer, loading: true });
-    axios
-      .post("http://localhost:6003/api/discount/", {
-        discount: offer.discount,
-        BeginDiscount: offer.beginDiscount,
-        endDiscount: offer.endDiscount
-      })
+
+    setDiscounts({ ...discounts, loading: true });
+    axios.post("http://localhost:6003/api/discount/",{
+      discount : discounts.discount,
+      BeginDiscount : discounts.BeginDiscount,
+      endDiscount : discounts.endDiscount,
+    }, {
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    })
       .then((resp) => {
-        setOffer({
-          ...offer,
+        console.log(`resp ${resp}`)
+        setDiscounts({
+          ...discounts,
           discount: "",
-          beginDiscount: "",
-          endDiscount: "",
+          BeginDiscount: "",
+          endDiscount : "",
           err: null,
           loading: false,
-          success: "Offer added Successfully !",
+          success: "Book Created Successfully !",
         });
-
       })
       .catch((err) => {
-        setOffer({
-          ...offer,
+        setDiscounts({
+          ...discounts,
           loading: false,
           success: null,
           err: "Something went wrong, please try again later !",
@@ -49,37 +58,37 @@ const AddOffers = () => {
     <div className="login-container">
       <h1 className="mb-4">Add New Offer</h1>
 
-      {offer.err && (
+      {discounts.err && (
         <Alert variant="danger" className="p-2">
-          {offer.err}
+          {discounts.err}
         </Alert>
       )}
 
-      {offer.success && (
+      {discounts.success && (
         <Alert variant="success" className="p-2">
-          {offer.success}
+          {discounts.success}
         </Alert>
       )}
 
-      <Form onSubmit={addDiscount}>
+    <Form onSubmit={createDiscount}>
 
         <Form.Group className="mb-3">
           <Form.Control type="text"
-            value={offer.discount} onChange={(e) => setOffer({ ...offer, discount: e.target.value })}
+            value={discounts.discount} onChange={(e) => setDiscounts({ ...discounts, discount: e.target.value })}
             required
             placeholder="Offer" />
         </Form.Group>
 
         <Form.Group className="mb-3">
           <Form.Control type="text"
-            value={offer.beginDiscount} onChange={(e) => setOffer({ ...offer, beginDiscount: e.target.value })}
+            value={discounts.BeginDiscount} onChange={(e) => setDiscounts({ ...discounts, BeginDiscount: e.target.value })}
             required
             placeholder="Start date" />
         </Form.Group>
 
         <Form.Group className="mb-3">
           <Form.Control type="text"
-            value={offer.endDiscount} onChange={(e) => setOffer({ ...offer, endDiscount: e.target.value })}
+            value={discounts.endDiscount} onChange={(e) => setDiscounts({ ...discounts, endDiscount: e.target.value })}
             required
             placeholder="End date" />
         </Form.Group>

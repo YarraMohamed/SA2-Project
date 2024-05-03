@@ -10,11 +10,11 @@ discount:{
 }
 ,
 BeginDiscount:{
-    type : Number,
+    type : String,
     required:true,
 },
 endDiscount:{
-    type : Number,
+    type : String,
     required:true,
 }
 
