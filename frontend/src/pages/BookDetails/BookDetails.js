@@ -12,7 +12,7 @@ import { Document, Page } from 'react-pdf';
 
 const BookDetails=()=>{
   let {id}=useParams();
-  // const Auth = getAuthUser();
+  const Auth = getAuthUser();
   const [book,setBook]=useState({
     loading : true,
     result : [],
@@ -52,41 +52,38 @@ const BookDetails=()=>{
     })
   },[])
 
-  // const [request,setRequest] = useState ({
-  //   err: "",
-  //   success : "",
-  //   loading: false,
-  //   success: null,
-  //   book_id :"",
-  // });
+  const [request,setRequest] = useState ({
+    err: "",
+    success : "",
+    loading: false,
+    success: null,
+    book_id :"",
+  });
 
-  // const requestBook = (id)=> {
-  //   axios
-  //     .post("http://localhost:4000/books/requests", {
-  //       book_id : id,
-  //     }, {
-  //       headers: {
-  //         tokens: Auth.tokens,
-  //       },
-  //     })
-  //     .then((resp) => {
-  //       setRequest({
-  //         ...request,
-  //         err: null,
-  //         loading: true,
-  //         success: "Requested Successfully !",
-  //       });
+  const requestBook = (id)=> {
+    axios
+      .post("http://localhost:4000/requests", {
+        book_id: id,
+        user_id: Auth.id
+      })
+      .then((resp) => {
+        setRequest({
+          ...request,
+          err: null,
+          loading: true,
+          success: "Requested Successfully !",
+        });
        
-  //     })
-  //     .catch((err) => {
-  //       setRequest({
-  //         ...request,
-  //         loading: true,
-  //         success: null,
-  //         err: "Something went wrong, please try again later !",
-  //       });
-  //     });
-  // };
+      })
+      .catch((err) => {
+        setRequest({
+          ...request,
+          loading: true,
+          success: null,
+          err: "Something went wrong, please try again later !",
+        });
+      });
+  };
 
     return(
     <div className="book-details-container p-4">
@@ -195,10 +192,10 @@ const BookDetails=()=>{
     </>
   )}   
   <button className="btn btn-dark ms-2" variant="primary"
-    //  disabled={request.loading===true}
-    //     onClick={(e) => {
-    //       requestBook(id);
-    //           }}
+     disabled={request.loading===true}
+        onClick={(e) => {
+          requestBook(id);
+              }}
               >
           Request Book
         </button>

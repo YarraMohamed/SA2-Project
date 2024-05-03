@@ -19,9 +19,8 @@ const Register =()=>{
 
   const RegisterFun = (e)=>{
     e.preventDefault();
-    console.log(register);
     setRegister({...register,loading:true,err:[]})
-    axios.post("http://localhost:4000/auth/register",{
+    axios.post("http://localhost:6004/register",{
       email : register.email,
       password : register.password,
       name : register.name,
@@ -34,7 +33,6 @@ const Register =()=>{
 
     })
     .catch((errors)=>{
-      console.log(errors);
       setRegister({...register,loading:true,err:errors.response.data.errors});
     })
   };
