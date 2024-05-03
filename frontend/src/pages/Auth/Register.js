@@ -14,7 +14,7 @@ const Register =()=>{
    name : "",
    phone : "",
    loading : false,
-   err : [],
+   err : null,
   });
 
   const RegisterFun = (e)=>{
@@ -42,7 +42,7 @@ const Register =()=>{
     <div className="login-container">
     <h1>Registration Form</h1>
 
-    {register.err.map((error , index)=>(
+    {register.err && register.err.map((error , index)=>(
       <Alert key={index} variant="danger" className="p-1">
                {error.msg}
                </Alert>

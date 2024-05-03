@@ -3,7 +3,7 @@ const discountSchema = require('../models/discountModel')
 
 const getDiscount =async (req ,res )=>{
     const discont  = await discountSchema.find({});
-    res.json({status:'success', code:500, data:discont})
+    res.json({status:'success', data:discont})
 }
 
 const createDiscount =async (req ,res)=>{

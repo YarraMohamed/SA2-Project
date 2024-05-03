@@ -13,7 +13,7 @@ const Login =()=>{
    email:"",
    password : "",
    loading : false,
-   err : [],
+   err : null,
   });
 
   const LoginFun = (e)=>{
@@ -38,7 +38,7 @@ const Login =()=>{
     return(
     <div className="login-container">
     <h1 className="mb-4">Login Form</h1>
-    {login.err.map((error , index)=>(
+    {login.err && login.err.map((error , index)=>(
       <Alert key={index} variant="danger" className="p-1">
                {error.msg}
                </Alert>

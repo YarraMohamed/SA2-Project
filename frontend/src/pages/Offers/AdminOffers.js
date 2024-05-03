@@ -7,6 +7,26 @@ import Spinner from "react-bootstrap/Spinner";
 
 const AdminOffers = () => {
 
+  const Auth = getAuthUser();
+    const [discount,setDiscount] = useState ({
+    loading : true,
+    results : [],
+    err : null,
+    reload : 0
+  })
+  useEffect(()=>{
+    setDiscount({...discount, loading : true })
+    axios.get("http://localhost:6002/books")
+    .then(resp =>{
+      console.log(resp);
+      setDiscount({...discount , results :resp.data.value,loading : false , err : null })
+
+    })
+    .catch(err =>{
+      setBooks({...books, loading : false , err :"something went wrong , please try again later!" })
+    })
+  },[books.reload])
+
   return (
     <div className="manage-books p-5">
         <div className="header-table mb-4">
