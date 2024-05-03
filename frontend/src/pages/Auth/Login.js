@@ -18,9 +18,8 @@ const Login =()=>{
 
   const LoginFun = (e)=>{
     e.preventDefault();
-    console.log(login);
     setLogin({...login,loading:true,err:[]})
-    axios.post("http://localhost:4000/auth/login",{
+    axios.post("http://localhost:6004/login",{
       email : login.email,
       password : login.password,
     })
@@ -32,7 +31,6 @@ const Login =()=>{
 
     })
     .catch((errors)=>{
-      console.log(errors);
       setLogin({...login,loading:true,err:errors.response.data.errors});
     })
   };

@@ -11,13 +11,8 @@ import Requests from "./pages/Requests/Requests";
 import ManageChapters from "./pages/ManageChapters/ManageChapters";
 import UpdateChapters from "./pages/ManageChapters/UpdateChapters"
 import AddChapters from "./pages/ManageChapters/AddChapters"
-import ManageReaders from "./pages/ManageReaders/ManageReaders"
-import UpdateReaders from "./pages/ManageReaders/UpdateReaders"
-import AddReaders from "./pages/ManageReaders/AddReader"
 import Guest from "./middleware/Guest.js"
 import Admin from "./middleware/Admin.js"
-import RequestsHistory from "./pages/Requests/RequestsHistory";
-import SearchHistory from "./pages/search/SearchHistory.js"
 import AdminOffers from './pages/Offers/AdminOffers';
 import UserOffers from './pages/Offers/UserOffers';
 import AddOffers from './pages/Offers/AddOffers';
@@ -35,10 +30,6 @@ export const routes = createBrowserRouter([
     {
       path: ":id",
       element: <BookDetails/>,
-    },
-    {
-      path: "history",
-      element: <SearchHistory/>,
     },
     {
         path: '/offers',
@@ -103,8 +94,7 @@ export const routes = createBrowserRouter([
               element: <UpdateChapters/>
 
             }
-          ]
-        
+          ] 
         }
       ]
     },
@@ -126,29 +116,7 @@ export const routes = createBrowserRouter([
           element: <AddChapters/>
         }
       ]
-    },
-    {
-      path: '/manage-readers',
-      element: <Admin/>,
-      children:[
-        {
-          path: '',
-          element: <ManageReaders/>
-        },
-        {
-          path: ':id',
-          element: <UpdateReaders/>
-        },
-        {
-          path: 'add',
-          element: <AddReaders/>
-        },
-        {
-          path: 'history',
-          element :<RequestsHistory/>
-        }
-      ]
-    },
+    }
     ]
    },
    {

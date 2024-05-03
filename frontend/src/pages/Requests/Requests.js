@@ -21,15 +21,10 @@ const Requests=()=>{
 
   useEffect(()=>{
     setRequests({...requests, loading : true })
-    axios.get("http://localhost:4000/books/requests/pending",{
-      headers: {
-        tokens : Auth.tokens
-      }
+    axios.get("http://localhost:4000/requests/pending",{
     })
     .then(resp =>{
-      console.log(resp);
       setRequests({...requests , results :resp.data ,loading : false , err : null })
-
     })
     .catch(err =>{
       setRequests({...requests, loading : false , err :"something went wrong , please try again later!" })
@@ -38,10 +33,7 @@ const Requests=()=>{
 
  
   const acceptRequest = (id) => {
-    axios.put("http://localhost:4000/books/requests/"+id+"/accepted",{
-      headers: {
-        tokens : Auth.tokens
-      }
+    axios.put("http://localhost:4000/requests/"+id+"/accepted",{
     })
       .then((resp) => {
         setRequests({ ...requests, reload: requests.reload + 1 });
@@ -51,10 +43,7 @@ const Requests=()=>{
       });
   };
   const declineRequest = (id) => {
-    axios.put("http://localhost:4000/books/requests/"+id+"/declined",{
-      headers: {
-        tokens : Auth.tokens
-      }
+    axios.put("http://localhost:4000/requests/"+id+"/declined",{
     })
       .then((resp) => {
         setRequests({ ...requests, reload: requests.reload + 1 });

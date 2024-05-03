@@ -6,13 +6,13 @@ import NavDropdown from 'react-bootstrap/NavDropdown';
 import { Link , useNavigate} from "react-router-dom";
 import {removeAuthUser , getAuthUser} from "../helper/Storage.js"
 import axios from "axios";
-import "../pages/Auth/Logout.js";
+
+
 const Header =()=>{
   const Auth = getAuthUser();
   const Navigate = useNavigate();
   
   const Logout= ()=>{
-    axios.put("http://localhost:4000/books/"+ Auth.id +"/logout")
    removeAuthUser();
   Navigate("/login");
 };
@@ -37,7 +37,6 @@ const Header =()=>{
             <Link className="nav-link" to={'/requests'}><h5>Requests</h5></Link>
            <NavDropdown title="Manage" menuVariant="dark" style={{fontSize:"18.1px",fontWeight:"bolder"}}>
               <Link className="dropdown-item" to={'/manage-books'}>Books</Link>
-              <Link className="dropdown-item" to={'/manage-readers'}>Readers</Link>
               <Link className="dropdown-item" to={'/manage-offers'}>Offers</Link>
             </NavDropdown>
             <Nav.Link className="nav-link" onClick={Logout}> <h5>Logout</h5></Nav.Link> 
@@ -50,12 +49,8 @@ const Header =()=>{
               <>
               <Link className="nav-link" to={'/'}><h5>Books list</h5></Link>
               <Link className="nav-link" to={'/offers'}><h5>Offers</h5></Link>
-            <Link className="nav-link" to={'/history'}><h5>Show History</h5></Link>
             <Nav.Link className="nav-link" onClick={Logout}> <h5>Logout</h5></Nav.Link> 
-
               </>
-              
-
             )
           }
 
