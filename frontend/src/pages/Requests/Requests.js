@@ -74,29 +74,27 @@ const Requests=()=>{
   <Table striped bordered hover size="sm" variant="dark">
       <thead>
         <tr>
-          <th>#</th>
-          <th>User Name</th>
-          <th>Book Name</th>
+          <th>User ID</th>
+          <th>Book ID</th>
           <th>Action</th>
         </tr>
       </thead>
       <tbody>
         {requests.results.map(request =>
-          <tr key={request.id}>
-          <td>{request.id}</td>
-          <td>{request.user_name}</td>
-          <td>{request.book_name}</td>
+          <tr key={request._id}>
+          <td>{request.user_id}</td>
+          <td>{request.book_id}</td>
           <td>
           
           <button className="btn btn-sm mx-2 btn-success"
            onClick={(e) => {
-              acceptRequest(request.id);
+              acceptRequest(request._id);
                   }}>
           Accept
           </button>
             <button className="btn btn-sm btn-danger"
             onClick={(e) => {
-              declineRequest(request.id);
+              declineRequest(request._id);
                   }}>
               Decline
             </button>
