@@ -64,7 +64,9 @@ const BookDetails=()=>{
     axios
       .post("http://localhost:4000/requests", {
         book_id: id,
-        user_id: Auth.id
+        book_name : book.result.name,
+        user_id: Auth._id,
+        user_name : Auth.name
       })
       .then((resp) => {
         setRequest({

@@ -74,16 +74,16 @@ const Requests=()=>{
   <Table striped bordered hover size="sm" variant="dark">
       <thead>
         <tr>
-          <th>User ID</th>
-          <th>Book ID</th>
+          <th>User Name</th>
+          <th>Book Name</th>
           <th>Action</th>
         </tr>
       </thead>
       <tbody>
         {requests.results.map(request =>
           <tr key={request._id}>
-          <td>{request.user_id}</td>
-          <td>{request.book_id}</td>
+          <td>{request.user_name}</td>
+          <td>{request.book_name}</td>
           <td>
           
           <button className="btn btn-sm mx-2 btn-success"

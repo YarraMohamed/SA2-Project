@@ -31,7 +31,7 @@ const Header =()=>{
             </>
           )}
 
-          { Auth && Auth.type === "1" && (
+          { Auth && Auth.type=== "1" && (
             <>
             <Link className="nav-link" to={'/'}><h5>Books list</h5></Link>
             <Link className="nav-link" to={'/requests'}><h5>Requests</h5></Link>

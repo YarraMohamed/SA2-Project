@@ -5,9 +5,17 @@ const requestSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
+    book_name : {
+        type : String,
+        required : true
+    },
     user_id: {
         type: String,
         required: true,
+    },
+    user_name:{
+        type:String,
+        required : true
     },
     request: {
         type: String,

@@ -15,16 +15,18 @@ const apiPort = 4000;
 
 app.post("/requests" , async (req, res) => {
     try {
-        const { book_id, user_id } = req.body;
+        const { book_id, user_id , book_name, user_name} = req.body;
         const newRequest = new Requests({
             book_id,
+            book_name,
             user_id,
+            user_name,
         });
         await newRequest.save();
         return res.status(200).send('Book request created successfully');
     } catch (error) {
         console.error(error);
-        return res.status(500).send('Error creating book request');
+        return res.status(500).json({error});
     }
 });
 
