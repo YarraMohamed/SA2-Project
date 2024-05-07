@@ -15,11 +15,9 @@ const apiPort = 4000;
 
 app.post("/requests" , async (req, res) => {
     try {
-        const { book_id, user_id , book_name, user_name} = req.body;
+        const { book_name, user_name} = req.body;
         const newRequest = new Requests({
-            book_id,
             book_name,
-            user_id,
             user_name,
         });
         await newRequest.save();

@@ -7,5 +7,4 @@ mongoose
   });
 
 const RequestsDB = mongoose.connection;
-
 module.exports = RequestsDB;
