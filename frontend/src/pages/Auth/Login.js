@@ -31,18 +31,19 @@ const Login =()=>{
 
     })
     .catch((errors)=>{
-      setLogin({...login,loading:true,err:errors.response.data.errors});
+      setLogin({...login,loading:true,err:"This service is down now, or you enter invalid data."});
     })
   };
 
     return(
     <div className="login-container">
     <h1 className="mb-4">Login Form</h1>
-    {login.err && login.err.map((error , index)=>(
-      <Alert key={index} variant="danger" className="p-1">
-               {error.msg}
+
+    {login.err && (
+      <Alert  variant="danger" className="p-1">
+               {login.err}
                </Alert>
-    ))}
+    )}
 
     <Form onSubmit={LoginFun}>
     <Form.Group className="mb-3" controlId="formBasicEmail">

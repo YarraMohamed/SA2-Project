@@ -67,7 +67,7 @@ const Requests=()=>{
 
       { requests.loading== false && requests.err!= null  && (
         <Alert variant="danger" className="p-1">
-                 Error, please try again later 
+                This service is down, please try again later.
             </Alert>
       )}
 

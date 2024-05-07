@@ -29,7 +29,7 @@ const ManageBooks=()=>{
 
     })
     .catch(err =>{
-      setBooks({...books, loading : false , err :"something went wrong , please try again later!" })
+      setBooks({...books, loading : false , err :"This service is down now, please try again later" })
     })
   },[books.reload])
 
@@ -40,7 +40,7 @@ const ManageBooks=()=>{
         setBooks({ ...books, reload: books.reload + 1 });
       })
       .catch((err) => {
-        setBooks({...books, loading : false , err :"something went wrong , please try again later!" })
+        setBooks({...books, loading : false , err :"This service is down now, please try again later" })
       });
   };
   

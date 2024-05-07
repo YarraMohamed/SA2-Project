@@ -33,7 +33,7 @@ const Register =()=>{
 
     })
     .catch((errors)=>{
-      setRegister({...register,loading:true,err:errors.response.data.errors});
+      setRegister({...register,loading:true,err:"This service is down now, or you enter invalid data."});
     })
   };
 
@@ -42,11 +42,11 @@ const Register =()=>{
     <div className="login-container">
     <h1>Registration Form</h1>
 
-    {register.err && register.err.map((error , index)=>(
-      <Alert key={index} variant="danger" className="p-1">
-               {error.msg}
+    {register.err && (
+      <Alert  variant="danger" className="p-1">
+               {register.err}
                </Alert>
-    ))}
+    )}
 
     <Form onSubmit={RegisterFun}>
     <Form.Group className="mb-3">

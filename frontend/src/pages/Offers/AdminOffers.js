@@ -21,7 +21,7 @@ const AdminOffers = () => {
 
     })
     .catch(err =>{
-      setDiscount({...discount, loading : false , err :"something went wrong , please try again later!" })
+      setDiscount({...discount, loading : false , err :"This service is down now, please try again later" })
     })
   },[discount.reload])
 

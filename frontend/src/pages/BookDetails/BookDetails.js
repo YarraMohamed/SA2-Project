@@ -63,9 +63,7 @@ const BookDetails=()=>{
   const requestBook = (id)=> {
     axios
       .post("http://localhost:4000/requests", {
-        book_id: id,
         book_name : book.result.name,
-        user_id: Auth._id,
         user_name : Auth.name
       })
       .then((resp) => {
@@ -192,15 +190,29 @@ const BookDetails=()=>{
 </Table>
       </div>
     </>
-  )}   
-  <button className="btn btn-dark ms-2" variant="primary"
-     disabled={request.loading===true}
-        onClick={(e) => {
-          requestBook(id);
-              }}
-              >
-          Request Book
-        </button>
+  )}  
+ <button
+  className="btn btn-dark ms-2"
+  variant="primary"
+  disabled={request.loading === true}
+  onClick={(e) => {
+    requestBook(id);
+  }}
+>
+  Request Book
+</button>
+
+{request.err === "Something went wrong, please try again later !" && (
+  <Alert variant="danger" className="p-1 mb-2">
+    Request service isn't available now, please try again later
+  </Alert>
+)}
+
+{request.success !== null && (
+  <Alert variant="info" className="p-1 mb-2">
+    {request.success}
+  </Alert>
+)}
     </div>               
     );
 };

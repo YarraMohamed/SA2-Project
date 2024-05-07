@@ -5,9 +5,8 @@ RUN npm install -g nodemon
 WORKDIR /app
 
 COPY ./package.json ./
-COPY ./yarn.lock ./
 
-RUN yarn install
+RUN npm install
 
 COPY . .
 

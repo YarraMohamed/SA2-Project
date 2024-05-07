@@ -41,7 +41,7 @@ const AddOffers = () => {
           endDiscount : "",
           err: null,
           loading: false,
-          success: "Book Created Successfully !",
+          success: "Offer Created Successfully !",
         });
       })
       .catch((err) => {
@@ -49,7 +49,7 @@ const AddOffers = () => {
           ...discounts,
           loading: false,
           success: null,
-          err: "Something went wrong, please try again later !",
+          err: "This service is down now, please try again later",
         });
       });
   };
